@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using App.Models.Enums;
 
 namespace App.Models
 {
@@ -13,6 +14,9 @@ namespace App.Models
         public int NumberOfEmployees { get; set; }
         public int QuantityOfMachines { get; set; }
         public double AnualProductionKilos { get; set; }
+
+        public AutomationLevel AutomationLevel { get; set; }
+        public TargetMarket TargetMarket { get; set; }
 
 
         public ICollection<Product> Products { get; set; } = new List<Product>();
