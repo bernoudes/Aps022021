@@ -6,14 +6,9 @@ using System.Threading.Tasks;
 
 namespace App.Controllers
 {
-    public class UserController : Controller
+    public class AgroToxicController : Controller
     {
-        public IActionResult Loader()
-        {
-            return View();
-        }
-
-        public IActionResult Register()
+        public IActionResult Index()
         {
             return View();
         }

@@ -1,0 +1,21 @@
+.sidebar{
+    grid-area:sidebar;
+    box-shadow: 5px 0 5px -3px gray;
+    color:red;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 20px;
+}
+.cMenuList{
+    list-style: none;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
+}
+.cMenuList > li:hover{
+    color:gray;
+}
+.cMenuList > .select{
+    color:blue;
+    font-style: italic;
+}

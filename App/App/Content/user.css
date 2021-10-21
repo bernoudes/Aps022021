@@ -1,0 +1,13 @@
+.fingerbox {
+    height: 200px;
+    width: 200px;
+    border: solid green;
+    border-radius: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 15pt;
+    color: green;
+    margin-bottom: 5px;
+}
