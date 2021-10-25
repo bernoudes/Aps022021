@@ -1,0 +1,22 @@
+﻿@model IEnumerable<App.Models.AgroToxic>
+@{
+    ViewData["Title"] = "Find All";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@foreach (var item in Model)
+{
+    <div class="InternalInfoBox">
+        <p>
+            <strong>Nome do Agrotóxico:&nbsp;</strong>@Html.DisplayFor(modelItem => item.Id)<br />
+            <strong>Nivel Tóxico:&nbsp;</strong>@Html.DisplayFor(modelItem => item.ToxicLevel)<br />
+            <strong>Descrição:&nbsp;</strong>@Html.DisplayFor(modelItem => item.Description)<br />
+        </p>
+        <div>
+            <button class="btn btn-primary">Editar</button>
+            <button class="btn btn-danger">Deletar</button>
+        </div>
+    </div>
+    <br />
+}

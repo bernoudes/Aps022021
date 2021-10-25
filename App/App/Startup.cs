@@ -4,10 +4,13 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using App.Data;
+using App.Services;
 
 namespace App
 {
@@ -26,6 +29,14 @@ namespace App
             services.AddControllersWithViews();
             services.AddRazorPages()
                     .AddRazorRuntimeCompilation();
+
+            var connection = Configuration.GetConnectionString("MyDbContext");
+
+            services.AddDbContext<MyDbContext>(options =>
+                options.UseMySql(connection, ServerVersion.AutoDetect(connection), builder => builder.MigrationsAssembly("App")));
+
+            services.AddScoped<AgroToxicService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

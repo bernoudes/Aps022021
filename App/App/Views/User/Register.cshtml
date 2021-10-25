@@ -6,11 +6,25 @@
 <h1>Registro</h1>
 <div>
     <form>
-        <label>Nome:</label>
-        <input type="text" />
-        <br/>
-        <label>Email:</label>
-        <input type="text"/>
+        <div class="form-group p-2 w-50">
+            <label for="iname">Nome:</label>
+            <input type="text" class="form-control" id="iname">
+        </div>
+        <div class="form-group p-2 w-50">
+            <label for="iemail">Email:</label>
+            <input type="email" class="form-control" id="iemail">
+        </div>
+        <div class="form-group p-2 d-flex flex-column" style="width: 200px; margin-bottom: 10px;">
+            <label for="ifileLoad">
+                <div class="fingerPrintArea">
+                    <label>COLOQUE<br />A IMAGEM<br />AQUI</label>
+                </div>
+            </label>
+            <div>
+                <button type="submit" class="btn btn-danger" style="width: 200px;"> Liberar Imagem</button>
+            </div>
+            <input type="file" id="ifileLoad" style="display: none;">
+        </div>
+        <button type="submit" class="btn btn-primary">Registrar</button>
     </form>
 </div>
-

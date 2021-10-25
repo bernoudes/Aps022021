@@ -1,0 +1,41 @@
+﻿@model 
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Agro Tóxico Editando</h1>
+<form>
+    <div class="form-group p-2 w-50">
+        <label for="iName">Nome: </label>
+        <input type="text" class="form-control" id="iName" />
+    </div>
+    <div class="form-group p-2 d-flex flex-row">
+        <label>Nivel Tóxico:</label>&nbsp;
+        <div class="form-check mr-3">
+            <input type="radio" class="form-check-input" name="ntoxiclevel" id="itoxiclevellow" />
+            <label for="itoxiclevellow">Baixo</label>
+        </div>
+        <div class="form-check mr-3">
+            <input type="radio" class="form-check-input" name="ntoxiclevel" id="itoxiclevelmedium" />
+            <label for="itoxiclevelmedium">Medio</label>
+        </div>
+        <div class="form-check mr-3">
+            <input type="radio" class="form-check-input" name="ntoxiclevel" id="itoxiclevelhigh" />
+            <label for="itoxiclevelhigh">Alto</label>
+        </div>
+    </div>
+
+    <div class="form-group p-2 w-50 d-flex flex-column">
+        <label for="idescription">Descrição</label>
+        <textarea class="form-control" rows="6" maxlength="200" style="resize:none;">
+        </textarea>
+    </div>
+
+    <div class="form-group d-flex flex-row">
+        <button class="btn btn-primary mr-5"> Criar </button>
+        <button class="btn btn-danger"> Voltar </button>
+    </div>
+</form>
+
+
+

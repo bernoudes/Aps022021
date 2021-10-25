@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using App.Models.Enums;
@@ -8,6 +10,7 @@ namespace App.Models
 {
     public class Company
     {
+        [Key][Column("Id")]
         public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
@@ -18,10 +21,10 @@ namespace App.Models
         public AutomationLevel AutomationLevel { get; set; }
         public TargetMarket TargetMarket { get; set; }
 
-
+        /*
         public ICollection<Product> Products { get; set; } = new List<Product>();
         public ICollection<AgroToxic> AgroToxics { get; set; } = new List<AgroToxic>();
         public ICollection<Incentive> Incentives { get; set; } = new List<Incentive>();
-        public ICollection<Tax> Taxes { get; set; } = new List<Tax>();
+        public ICollection<Tax> Taxes { get; set; } = new List<Tax>();*/
     }
 }
