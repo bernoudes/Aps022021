@@ -8,6 +8,7 @@ namespace App.Controllers
 {
     public class CompanyController : Controller
     {
+  
         public IActionResult Index()
         {
             return View();

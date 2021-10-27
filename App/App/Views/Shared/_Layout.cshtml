@@ -16,14 +16,46 @@
             <button class="btn btn-danger">Sair</button>
         </div>
     </header> 
-    <div class="container">
+    <div class="nav nav-side">
+        <ul class="cMenuList" style="list-style: none;">
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="AgroToxic"
+                   asp-action="Index">Agrotóxico</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Product"
+                   asp-action="Index">Produtos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Incentive"
+                   asp-action="Index">Incentivos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Tax"
+                   asp-action="Index">Taxas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Company"
+                   asp-action="Index">Empresas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Produtores"
+                   asp-action="Index">Produtores</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="User"
+                   asp-action="Index">Usuários</a>
+            </li>
+        </ul>
+    </div>
+    <div class="container-fluid content" >
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
+        <div class="final">
             App Construído para a aps da unip - 5 semestre (criado e programado por Lucas Bernardo da Silva)
             &copy; 2021 - App - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>

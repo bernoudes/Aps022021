@@ -35,8 +35,9 @@ namespace App.Services
         {
             try
             {
+                
                 var obj = await _context.AgroToxic.FindAsync(id);
-                _context.AgroToxic.Remove(obj);
+                _context.Remove(obj);
                 await _context.SaveChangesAsync();
             }
             catch(DbUpdateException e)

@@ -36,6 +36,11 @@ namespace App
                 options.UseMySql(connection, ServerVersion.AutoDetect(connection), builder => builder.MigrationsAssembly("App")));
 
             services.AddScoped<AgroToxicService>();
+            services.AddScoped<CompanyService>();
+            services.AddScoped<IncentiveService>();
+            services.AddScoped<ProductService>();
+            services.AddScoped<TaxService>();
+            services.AddScoped<UserService>();
 
         }
 

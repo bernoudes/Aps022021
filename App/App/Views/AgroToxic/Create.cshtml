@@ -1,39 +1,40 @@
-﻿
+﻿@model App.Models.AgroToxic
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Criando</h1>
-<form>
+<h1>Agro Tóxico Criando</h1>
+<form asp-action="Create">
     <div class="form-group p-2 w-50">
-        <label for="iName">Nome: </label>
-        <input type="text" class="form-control" id="iName" />
+        <label asp-for="Name">Nome:</label>
+        <input asp-for="Name" class="form-control" />
     </div>
     <div class="form-group p-2 d-flex flex-row">
         <label>Nivel Tóxico:</label>&nbsp;
+
         <div class="form-check mr-3">
-            <input type="radio" class="form-check-input" name="ntoxiclevel" id="itoxiclevellow" />
+            <input type="radio" class="form-check-input" asp-for="ToxicLevel" value="1" checked />
             <label for="itoxiclevellow">Baixo</label>
         </div>
         <div class="form-check mr-3">
-            <input type="radio" class="form-check-input" name="ntoxiclevel" id="itoxiclevelmedium" />
+            <input type="radio" class="form-check-input" asp-for="ToxicLevel" value="2"/>
             <label for="itoxiclevelmedium">Medio</label>
         </div>
         <div class="form-check mr-3">
-            <input type="radio" class="form-check-input" name="ntoxiclevel" id="itoxiclevelhigh" />
+            <input type="radio" class="form-check-input" asp-for="ToxicLevel" value="3"/>
             <label for="itoxiclevelhigh">Alto</label>
         </div>
     </div>
-    
+
     <div class="form-group p-2 w-50 d-flex flex-column">
         <label for="idescription">Descrição</label>
-        <textarea class="form-control" rows="6" maxlength="200" style="resize:none;">
+        <textarea class="form-control" rows="6" maxlength="200" style="resize:none;" asp-for="Description">
         </textarea>
     </div>
 
     <div class="form-group d-flex flex-row">
-        <button class="btn btn-primary mr-5"> Criar </button>
-        <button class="btn btn-danger"> Voltar </button>
+        <button class="btn btn-primary mr-5" type="submit" value="Create"> Create </button>
+        <button class="btn btn-danger" asp-action="Index"> Voltar </button>
     </div>
 </form>
 
