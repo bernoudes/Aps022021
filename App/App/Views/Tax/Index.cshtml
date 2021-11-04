@@ -1,10 +1,10 @@
-﻿@model IEnumerable<App.Models.User>
+﻿@model IEnumerable<App.Models.Tax>
 
 @{
-    ViewData["Title"] = "Users";
+    ViewData["Title"] = "Tax";
 }
 
-<h1>Usuários</h1>
+<h1>Taxas</h1>
 @if (TempData["message"] != null)
 {
     <h3>Erro na Ação Anterior</h3>
@@ -15,10 +15,9 @@
 {
     <div class="InternalInfoBox">
         <p style="word-break: break-all; white-space:normal;">
-            <strong>Nome:&nbsp;</strong>@Html.DisplayFor(modelItem => item.Name)<br />
-            <strong>Email:&nbsp;</strong>@Html.DisplayFor(modelItem => item.Email)<br />
-            <strong>Cargo:&nbsp;</strong>@Html.DisplayFor(modelItem => item.Position)<br />
-            <strong>Tipo de acesso:&nbsp;</strong>@Html.DisplayFor(modelItem => item.UserLevel)<br />
+            <strong>Nome da Taxa:&nbsp;</strong>@Html.DisplayFor(modelItem => item.Name)<br />
+            <strong>Sigla:&nbsp;</strong>@Html.DisplayFor(modelItem => item.Initials)<br />
+            <strong>Descrição:&nbsp;</strong>@Html.DisplayFor(modelItem => item.Description)<br />
         </p>
         <div>
             <a asp-action="Edit" asp-route-id="@item.Id"><button class="btn btn-primary">Editar</button></a>

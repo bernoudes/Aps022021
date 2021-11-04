@@ -9,10 +9,12 @@ namespace App.Models
 {
     public class Tax
     {
-        [Column("id")]
+
+        [Key()]
         public int Id { get; set; }
         public string Name { get; set; }
         public string Initials { get; set; }
         public string Description { get; set; }
+        public virtual ICollection<CompanyTax> CompanyTax { get; set; }
     }
 }

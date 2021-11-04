@@ -10,10 +10,11 @@ namespace App.Models
 {
     public class User
     {
-        [Column("id")]
+        [Key()]
         public int Id { get; set; }
+        public string Name { get; set; }
         public string Email { get; set; }
+        public string Position { get; set; }
         public UserLevel UserLevel { get; set; }
-
     }
 }

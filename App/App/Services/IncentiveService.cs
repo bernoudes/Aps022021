@@ -39,7 +39,7 @@ namespace App.Services
         //UPDATE
         public async Task UpdateAsync(Incentive obj)
         {
-            var hasAny = await _context.Incentive.AnyAsync(x => x.Id == obj.id);
+            var hasAny = await _context.Incentive.AnyAsync(x => x.Id == obj.Id);
             if (!hasAny)
             {
                 throw new NotFoundException("id not found");

@@ -24,7 +24,7 @@ namespace App.Services
             return await _context.Tax.ToListAsync();
         }
 
-        public async Task<Tax> FindById(int id)
+        public async Task<Tax> FindByIdAsync(int id)
         {
             return await _context.Tax.FirstOrDefaultAsync(obj => obj.Id == id);
         }

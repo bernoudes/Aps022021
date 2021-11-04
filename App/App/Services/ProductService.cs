@@ -24,7 +24,7 @@ namespace App.Services
             return await _context.Product.ToListAsync();
         }
 
-        public async Task<Product> FindById(int id)
+        public async Task<Product> FindByIdAsync(int id)
         {
             return await _context.Product.FirstOrDefaultAsync(obj => obj.Id == id);
         }
@@ -60,7 +60,7 @@ namespace App.Services
         {
             try
             {
-                var obj = _context.Product.FindAsync(id);
+                var obj = await _context.Product.FindAsync(id);
                 _context.Remove(obj);
                 await _context.SaveChangesAsync();
             }

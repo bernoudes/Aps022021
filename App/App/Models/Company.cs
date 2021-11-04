@@ -10,7 +10,7 @@ namespace App.Models
 {
     public class Company
     {
-        [Key][Column("Id")]
+        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
@@ -20,11 +20,9 @@ namespace App.Models
 
         public AutomationLevel AutomationLevel { get; set; }
         public TargetMarket TargetMarket { get; set; }
-
-        /*
-        public ICollection<Product> Products { get; set; } = new List<Product>();
-        public ICollection<AgroToxic> AgroToxics { get; set; } = new List<AgroToxic>();
-        public ICollection<Incentive> Incentives { get; set; } = new List<Incentive>();
-        public ICollection<Tax> Taxes { get; set; } = new List<Tax>();*/
+        public virtual ICollection<CompanyProduct> CompanyProduct { get; set; }
+        public virtual ICollection<CompanyAgrotoxic> CompanyAgrotoxic { get; set; }
+        public virtual ICollection<CompanyIncentive> CompanyIncentive { get; set; }
+        public virtual ICollection<CompanyTax> CompanyTax { get; set; }
     }
 }

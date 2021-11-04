@@ -9,8 +9,9 @@ namespace App.Models
 {
     public class Product
     {
-        [Column("id")]
+        [Key()]
         public int Id { get; set; }
         public string Name { get; set; }
+        public virtual ICollection<CompanyProduct> CompanyProduct { get; set; }
     }
 }

@@ -78,3 +78,16 @@ footer {
 .cMenuList > .select {
     color: blue;
 }
+
+.list-check {
+    height: 150px;
+    max-width: 350px;
+    overflow-y: scroll;
+
+    border: solid black;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: 20px;
+
+
+}

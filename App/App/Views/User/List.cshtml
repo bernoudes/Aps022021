@@ -15,10 +15,10 @@
 {
     <div class="InternalInfoBox">
         <p style="word-break: break-all; white-space:normal;">
-            <strong>Nome:&nbsp;</strong>@Html.DisplayFor(modelItem => item.Name)<br />
-            <strong>Email:&nbsp;</strong>@Html.DisplayFor(modelItem => item.Email)<br />
-            <strong>Cargo:&nbsp;</strong>@Html.DisplayFor(modelItem => item.Position)<br />
-            <strong>Tipo de acesso:&nbsp;</strong>@Html.DisplayFor(modelItem => item.UserLevel)<br />
+            <strong>Nome do Agrotóxico:&nbsp;</strong>@Html.DisplayFor(modelItem => item.Name)<br />
+            <strong>Descrição:&nbsp;</strong>@Html.DisplayFor(modelItem => item.Email)<br />
+            <strong>Descrição:&nbsp;</strong>@Html.DisplayNameFor(modelItem =>item.Position)<br />
+            <strong>Nivel Tóxico:&nbsp;</strong>@Html.DisplayFor(modelItem => item.UserLevel)<br />
         </p>
         <div>
             <a asp-action="Edit" asp-route-id="@item.Id"><button class="btn btn-primary">Editar</button></a>

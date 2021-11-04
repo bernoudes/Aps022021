@@ -1,0 +1,59 @@
+﻿@model IEnumerable<App.Models.Company>
+@{
+    ViewData["Title"] = "Empresas";
+}
+
+<h1>Empresas</h1>
+@foreach (var item in Model)
+{
+<div class="InternalInfoBox">
+    <p style="word-break: break-all; white-space:normal;">
+        <strong>Nome da Unidade:&nbsp;</strong>@Html.DisplayFor(modelItem => item.Name)<br />
+        <strong>Endereço do produtor:&nbsp;</strong>@Html.DisplayFor(modelItem => item.Address)<br />
+        <strong>Mercado Destinado:&nbsp;</strong>@Html.DisplayFor(modelItem => item.TargetMarket)<br />
+        <strong>Numero de Empregados:&nbsp;</strong>@Html.DisplayFor(modelItem => item.NumberOfEmployees)<br />
+        <strong>Quantidade de máquinas:&nbsp;</strong>@Html.DisplayFor(modelItem => item.QuantityOfMachines)<br />
+        <strong>Nível de automação:&nbsp;</strong>@Html.DisplayFor(modelItem => item.AutomationLevel)
+    </p>
+    <div style="color: red;">
+        <strong>Produtos:&nbsp;</strong><br />
+        @foreach (var product in item.CompanyProduct)
+        {
+            <strong>&nbsp; &nbsp; &nbsp;</strong>
+            @Html.DisplayFor(modelItem => product.Product.Name)<br />
+        }
+    </div>
+    <div style="color: green;">
+        <strong>Agrotóxicos Utilizados:&nbsp;</strong><br />
+        @foreach (var agrotoxico in item.CompanyAgrotoxic)
+        {
+            <strong>&nbsp; &nbsp; &nbsp;</strong>
+            @Html.DisplayFor(modelItem => agrotoxico.AgroToxic.Name)<br />
+        }
+    </div>
+    <div style="color: blue;">
+        <strong>Taxas:&nbsp;</strong><br />
+        @foreach (var tax in item.CompanyTax)
+        {
+            <strong>&nbsp; &nbsp; &nbsp;</strong>
+            @Html.DisplayFor(modelItem => tax.Tax.Name)
+            <strong>—</strong>
+            @Html.DisplayFor(modelItem => tax.Tax.Initials)
+            <br />
+        }
+    </div>
+    <div style="color: darkorange;">
+        <strong>Incentivos:&nbsp;</strong><br />
+        @foreach (var incentive in item.CompanyIncentive)
+        {
+            <strong>&nbsp; &nbsp; &nbsp;</strong>
+            @Html.DisplayFor(modelItem => incentive.Incentive.Name)<br />
+        }
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@item.Id"><button class="btn btn-primary">Editar</button></a>
+        <a asp-action="Delete" asp-route-id="@item.Id"><button class="btn btn-danger">Deletar</button></a>
+    </div>
+</div>
+    <br />
+}

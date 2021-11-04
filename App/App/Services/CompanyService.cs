@@ -21,12 +21,22 @@ namespace App.Services
         //FIND
         public async Task<List<Company>> FindAllAsync()
         {
-            return await _context.Company.ToListAsync();
+            return await _context.Company
+                .Include(e=> e.CompanyTax).ThenInclude(tax => tax.Tax)
+                .Include(e => e.CompanyAgrotoxic).ThenInclude(agrotoxic => agrotoxic.AgroToxic)
+                .Include(e => e.CompanyIncentive).ThenInclude(incetive => incetive.Incentive)
+                .Include(e => e.CompanyProduct).ThenInclude(product => product.Product)
+                .ToListAsync();
         }
 
         public async Task<Company> FindByIdAsync(int id)
         {
-            return await _context.Company.FirstOrDefaultAsync(obj => obj.Id == id);
+            return await _context.Company
+                .Include(e => e.CompanyTax).ThenInclude(tax => tax.Tax)
+                .Include(e => e.CompanyAgrotoxic).ThenInclude(agrotoxic => agrotoxic.AgroToxic)
+                .Include(e => e.CompanyIncentive).ThenInclude(incetive => incetive.Incentive)
+                .Include(e => e.CompanyProduct).ThenInclude(product => product.Product)
+                .FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
         //CREATE
@@ -46,8 +56,13 @@ namespace App.Services
             }
             try
             {
+                ManyToManyCompanyService many = new(_context);
+                many.UpdateCompanyProduct(obj.Id, obj.CompanyProduct);
+                many.UpdateCompanyIncentive(obj.Id, obj.CompanyIncentive);
+                many.UpdateCompanyTax(obj.Id, obj.CompanyTax);
+                many.UpdateCompanyAgroToxic(obj.Id, obj.CompanyAgrotoxic);
                 _context.Company.Update(obj);
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();    
             }
             catch(DbUpdateConcurrencyException e)
             {

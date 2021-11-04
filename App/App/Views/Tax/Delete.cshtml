@@ -1,0 +1,15 @@
+﻿@model App.Models.Tax
+
+@{
+    ViewData["Title"] = "TaxDelete";
+}
+
+<h1>Taxa Deletar</h1>
+<div>
+    <h3>Tem certeza que deseja deletar @Model.Name</h3>
+    <form asp-action="Delete">
+        <button type="submit" value="Delete" class="btn btn-danger"> Deletar</button>
+        <button asp-action="Index" class="btn btn-success"> Voltar </button>
+    </form>
+</div>
+

@@ -41,7 +41,7 @@ namespace App
             services.AddScoped<ProductService>();
             services.AddScoped<TaxService>();
             services.AddScoped<UserService>();
-
+            services.AddScoped<ManyToManyCompanyService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

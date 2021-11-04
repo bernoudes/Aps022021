@@ -1,0 +1,38 @@
+﻿@model App.Models.Incentive
+@{
+    ViewData["Title"] = "IncentiveEdit";
+}
+
+<h1>Incentivo Edição</h1>
+<form asp-action="Edit">
+    <div class="form-group p-2 w-50">
+        <label asp-for="Name">Nome:</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group p-2 d-flex flex-row">
+        <label>Tipo de Incentivo:</label>&nbsp;
+
+        <div class="form-check mr-3">
+            <input type="radio" class="form-check-input" asp-for="TypeOfIncentive" value="1" checked="@(1==(int)Model?.TypeOfIncentive)" />
+            <label for="iIncetiveCredito">Credito</label>
+        </div>
+        <div class="form-check mr-3">
+            <input type="radio" class="form-check-input" asp-for="TypeOfIncentive" value="2" checked="@(2==(int)Model?.TypeOfIncentive)"/>
+            <label for="iIncetiveExempt">Isenção</label>
+        </div>
+    </div>
+
+    <div class="form-group p-2 w-50 d-flex flex-column">
+        <label for="idescription">Descrição</label>
+        <textarea class="form-control" rows="6" maxlength="200" style="resize:none;" asp-for="Description">
+        </textarea>
+    </div>
+
+    <div class="form-group d-flex flex-row">
+        <button class="btn btn-primary mr-5" type="submit" value="Save"> Salvar </button>
+        <button class="btn btn-danger" asp-action="Index"> Voltar </button>
+    </div>
+</form>
+
+
+

@@ -10,10 +10,12 @@ namespace App.Models
 {
     public class Incentive
     {
-        [Column("id")]
+
+        [Key()]
         public int Id { get; set; }
         public string Name { get; set; }
         public TypeIncentive TypeOfIncentive  { get; set; }
         public string Description { get; set; }
+        public virtual ICollection<CompanyIncentive> CompanyIncentive { get; set; }
     }
 }
