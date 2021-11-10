@@ -11,12 +11,17 @@
 <body>
     <header>
         <h2>Seja bem vindo</h2>
-        <div>
-            Nome do Usuario:
-            <button class="btn btn-danger">Sair</button>
-        </div>
-    </header> 
-    <div class="nav nav-side">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div>
+                @User.Identity.Name
+                <a class="nav-link" asp-area="" asp-controller="Home"
+                   asp-action="Logout">Logout</a>
+            </div>
+        }
+
+    </header>
+    <!--<div class="nav nav-side">
         <ul class="cMenuList" style="list-style: none;">
             <li class="nav-item">
                 <a class="nav-link" asp-area="" asp-controller="AgroToxic"
@@ -43,8 +48,8 @@
                    asp-action="Index">Usuários</a>
             </li>
         </ul>
-    </div>
-    <div class="container-fluid content" >
+    </div>-->
+    <div class="container-fluid content">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

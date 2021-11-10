@@ -7,9 +7,11 @@ using App.Services;
 using App.Models;
 using App.Services.Exceptions;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 
 namespace App.Controllers
 {
+    [Authorize(Roles = "Minister")]
     public class AgroToxicController : Controller
     {
         private readonly AgroToxicService _agroToxicService;
@@ -27,6 +29,7 @@ namespace App.Controllers
         }
 
         //CRIAÇÃO
+        
         public IActionResult Create()
         {
             return View();

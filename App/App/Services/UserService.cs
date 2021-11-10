@@ -30,6 +30,13 @@ namespace App.Services
             return await _context.User.FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<User> FindByEmailAsync(string email)
+        {
+            return await _context.User.FirstOrDefaultAsync(x => x.Email == email);
+        }
+
+        
+
         //CREATE
         public async Task InsertAsync(User obj)
         {
@@ -69,6 +76,12 @@ namespace App.Services
             {
                 throw new IntegrityException(e.Message);
             }
+        }
+        ////////////////////////////////////////////////////
+        ///
+       public async Task FindAndCompareFingerPrinterAsync(User obj)
+        {
+            var user = await _context.User.FirstOrDefaultAsync(x => x.Email == obj.Email);      
         }
     }
 }

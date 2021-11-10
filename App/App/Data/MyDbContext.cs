@@ -84,6 +84,8 @@ namespace App.Data
                  .HasOne(p => p.Tax)
                  .WithMany(cp => cp.CompanyTax)
                  .HasForeignKey(p => p.Tax_id);
+
+            
         }
     }
 }

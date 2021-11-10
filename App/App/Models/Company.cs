@@ -13,7 +13,9 @@ namespace App.Models
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Address { get; set; }
+        public string Address_Street { get; set; }
+        public string Address_Number { get; set; }
+        public string Address_CEP { get; set; }
         public int NumberOfEmployees { get; set; }
         public int QuantityOfMachines { get; set; }
         public double AnualProductionKilos { get; set; }

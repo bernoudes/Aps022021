@@ -7,9 +7,11 @@ using App.Services;
 using App.Models;
 using App.Services.Exceptions;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 
 namespace App.Controllers
 {
+    [Authorize(Roles = "Minister")]
     public class IncentiveController : Controller
     {
         private readonly IncentiveService _incentiveService;

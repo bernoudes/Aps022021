@@ -76,7 +76,7 @@ namespace App.Services
             try
             {
                 var obj = await _context.Company.FindAsync(id);
-                _context.Company.Add(obj);
+                _context.Remove(obj);
                 await _context.SaveChangesAsync();
             }
             catch(DbUpdateException e)

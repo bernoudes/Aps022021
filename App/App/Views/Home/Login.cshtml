@@ -1,0 +1,33 @@
+﻿@model App.Models.ViewModel.UserLoginViewModel
+@{
+    var returnUrl = ViewData["ReturnUrl"] as string;
+    var error = TempData["Error"] as string;
+}
+
+@if (TempData["DataHere"] != null)
+{
+    <h3>Erro na Ação Anterior</h3>
+    <p>@TempData["DataHere"]</p>
+}
+
+<div style="height: 100vh;" class="d-flex flex-column align-items-center">
+    <form action="/login?ReturnUrl=@System.Net.WebUtility.UrlEncode(returnUrl)" method="post" enctype="multipart/form-data">
+        <h1>Entrar</h1>
+        <div class="form-group p-2 w-50">
+            <label for="iemail">Email:</label>
+            <input type="email" class="form-control" id="iemail" asp-for="Email">
+        </div>
+        <div class="form-group p-2 d-flex flex-column" style="width: 200px; margin-bottom: 10px;">
+            <label for="ifileLoad">
+                <div class="fingerPrintArea">
+                    <label>COLOQUE<br />A IMAGEM<br />AQUI</label>
+                </div>
+            </label>
+            <div>
+                <button type="submit" class="btn btn-danger" style="width: 200px;"> Liberar Imagem</button>
+            </div>
+            <input id="ifileLoad" asp-for="ImgFile" />
+        </div>
+        <button type="submit" class="btn btn-success" value="login">Entrar</button>
+    </form>
+</div>

@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using App.Data;
 using App.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace App
 {
@@ -27,6 +28,28 @@ namespace App
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/login";
+                    options.AccessDeniedPath = "/denied";
+                    options.Events = new CookieAuthenticationEvents()
+                    {
+                        OnSignedIn = async context =>
+                        {
+                            await Task.CompletedTask;
+                        },
+                        OnSigningOut = async context =>
+                        {
+                            await Task.CompletedTask;
+                        },
+                        OnValidatePrincipal = async context =>
+                        {
+                            await Task.CompletedTask;
+                        }
+                    };
+                });
+
             services.AddRazorPages()
                     .AddRazorRuntimeCompilation();
 
@@ -62,6 +85,7 @@ namespace App
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -69,6 +93,7 @@ namespace App
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

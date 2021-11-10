@@ -7,9 +7,14 @@ using App.Services;
 using App.Services.Exceptions;
 using App.Models;
 using System.Diagnostics;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 
 namespace App.Controllers
 {
+    [Authorize(Roles = "Minister")]
     public class UserController : Controller
     {
         private readonly UserService _userService;
@@ -39,7 +44,7 @@ namespace App.Controllers
             await _userService.InsertAsync(user);
             return RedirectToAction(nameof(Index));
         }
-
+     
         //UPDATE
         public async Task<IActionResult> Edit(int? id)
         {

@@ -7,7 +7,7 @@ namespace App.Models.ViewModel
 {
     public class CompanyViewModel
     {
-        public Company Company { get; set; }
+        public Company Company { get; set; } 
 
         public List<CheckBoxViewModel> AgroToxicCheck { get; set; } = new List<CheckBoxViewModel>();
         public List<CheckBoxViewModel> TaxCheck { get; set; } = new List<CheckBoxViewModel>();
@@ -74,6 +74,27 @@ namespace App.Models.ViewModel
                 }
             }
 
+        }
+        public void SetValuesFalseCheck()
+        {
+            foreach (var product in Product)
+            {
+                ProductCheck.Add(new CheckBoxViewModel() { isChecked = false });
+            }
+            foreach (var agroToxic in AgroToxic)
+            {
+                AgroToxicCheck.Add(new CheckBoxViewModel() { isChecked = false });
+            }
+            //TAX
+            foreach (var tax in Tax)
+            {
+                TaxCheck.Add(new CheckBoxViewModel() { isChecked = false });
+            }
+            //INCENTIVE
+            foreach (var incentive in Incentive)
+            {
+                IncentiveCheck.Add(new CheckBoxViewModel() { isChecked = false });
+            }
         }
         public void SetValuesInCheck()
         {

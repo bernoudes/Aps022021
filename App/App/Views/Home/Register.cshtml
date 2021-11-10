@@ -1,0 +1,35 @@
+﻿@model App.Models.User
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Registro</h1>
+@if (TempData["Error"] != null)
+{
+    <h3>Erro na Ação Anterior</h3>
+    <p>@TempData["Error"]</p>
+}
+<div>
+    <form asp-action="Register" enctype="multipart/form-data">
+        <div class="form-group p-2 w-50">
+            <label for="iname">Nome:</label>
+            <input type="text" class="form-control" id="iname" asp-for="Name">
+        </div>
+        <div class="form-group p-2 w-50">
+            <label for="iemail">Email:</label>
+            <input type="email" class="form-control" id="iemail" asp-for="Email">
+        </div>
+        <div class="form-group p-2 d-flex flex-column" style="width: 200px; margin-bottom: 10px;">
+            <label for="ifileLoad">
+                <div class="fingerPrintArea">
+                    <label>COLOQUE<br />A IMAGEM<br />AQUI</label>
+                </div>
+            </label>
+            <div>
+                <button type="submit" class="btn btn-danger" style="width: 200px;"> Liberar Imagem</button>
+            </div>
+            <input id="ifileLoad" asp-for="ImgFile" />
+        </div>
+        <button type="submit" class="btn btn-success">Registrar</button>
+    </form>
+</div>

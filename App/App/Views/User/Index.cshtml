@@ -4,7 +4,7 @@
     ViewData["Title"] = "Users";
 }
 
-<h1>Usuários</h1>
+<h1>Usuários    <a asp-action="Create"><button class="btn btn-success">Cadastrar novo</button></a></h1>
 @if (TempData["message"] != null)
 {
     <h3>Erro na Ação Anterior</h3>
