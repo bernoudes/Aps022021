@@ -18,7 +18,7 @@ namespace App.Services
             if (form != null && form.Length > 0)
             {
                 var cont = form.ContentType;
-                if (cont == "image/png" || cont == "image/bmp" || cont == "image/jpg")
+                if (cont == "image/png" || cont == "image/bmp" || cont == "image/jpeg")
                 {
                     byte[] newArray = ImageIFormForBytetArray(form);
                     return CompareByteArray(ImgByte,newArray);

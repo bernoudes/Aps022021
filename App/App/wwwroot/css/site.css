@@ -1,11 +1,10 @@
 ﻿body {
     display: grid;
     height: 100vh;
-    grid-template-columns: auto 1fr auto;
     grid-template-rows: auto 1fr auto;
     grid-template-areas:
         "header header header"
-        "nav-side content content"
+        "content content content"
         "footer footer footer";
 }
 
@@ -25,7 +24,45 @@ header {
     grid-area: content;
     overflow-y: scroll;
     overflow-x: hidden;
+
+    display:flex;
+    flex-direction: row;
 }
+
+.content_side_l {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.backgroun_light {
+    background-image: url("../images/backgrounds/01_Agro.jpg");
+}
+.backgroun_night {
+    background-image: url("../images/backgrounds/02_Agro.jpg");
+}
+
+.titleContetSide {
+    border: solid RGB(50,50,50);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+
+    width: max-content;
+    height: max-content;
+
+    padding: 10px 20px;
+    margin: 20px 0px;
+}
+
+.content_side_r {
+    background-color: #FFFFF0;
+    width: 60%;
+    padding: 20px 50px;
+}
+
 
 footer {
     grid-area: footer;
@@ -33,11 +70,11 @@ footer {
 }
 
 .fingerPrintArea {
-    height: 200px; 
+    height: 80px; 
     width: 200px; 
 
     border: solid green; 
-    border-radius: 10%;
+    border-radius: 20px;
 
     display: flex;
     align-items: center;
@@ -51,6 +88,16 @@ footer {
 .InternalInfoBox {
     border: solid black;
     border-radius: 10px;
+    margin-right: 20px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.InternalInfoBoxLat {
+    border: solid black;
+    border-radius: 10px;
+    margin-right: 20px;
+    width: 400px;
     padding: 10px;
     margin-bottom: 10px;
 }
@@ -88,6 +135,8 @@ footer {
     padding: 10px;
     border-radius: 10px;
     margin-left: 20px;
+}
 
-
+.error_message{
+    color:red;
 }

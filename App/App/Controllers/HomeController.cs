@@ -47,37 +47,33 @@ namespace App.Controllers
             var userorigem = await _userService.FindByEmailAsync(userViewModel.Email);
             if (userorigem!= null && userorigem.Email != null) { 
                 var value = ImgMethodsService.CompareIFormFileImgWithByteArray(userViewModel.ImgFile, userorigem.Image);
-                TempData["DataHere"] = $"Email: {userorigem.Email} \n percent: {value}";
+
+                if (value > 80) 
+                {
+                    var claims = new List<Claim>();
+                    claims.Add(new Claim(ClaimTypes.Name, userorigem.Email));
+                    claims.Add(new Claim(ClaimTypes.NameIdentifier, userorigem.Name));
+                    claims.Add(new Claim(ClaimTypes.Email, userorigem.Email));
+                    claims.Add(new Claim(ClaimTypes.Role, userorigem.UserLevel.ToString()));
+
+                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
+                    await HttpContext.SignInAsync(claimsPrincipal);
+                    if (userorigem.UserLevel == Models.Enums.UserLevel.Public)
+                    {
+                        return RedirectToAction("ListCompany", "Company");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Company");
+                    }
+                }
             }
             else
             {
-                TempData["DataHere"] = "useorigim is null";
+                TempData["Error"] = "Este email não pertence a nenhum usuário ativo";
             }
-
-            
-            return View();
-
-
-           // var user = _userService.FindAndCompareFingerPrinterAsync(username, userfingerdata);
-            
-            /*
-            if (username == "bob" && password == "pizza")
-            {
-                var claims = new List<Claim>();
-                claims.Add(new Claim("usename", username));
-                claims.Add(new Claim(ClaimTypes.NameIdentifier, username));
-                claims.Add(new Claim(ClaimTypes.Name, "Bob Edwar Jones"));
-                claims.Add(new Claim(ClaimTypes.Role, "Minister"));
-                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-                await HttpContext.SignInAsync(claimsPrincipal);
-                if(returnUrl == null)
-                {
-                    return RedirectToAction("ListCompany", "Company");
-                }
-                return Redirect(returnUrl);
-            }
-            TempData["Error"] = "Error. Username or Password is invalid";*/
+            TempData["Error"] = "A digital não bate com a do usuário";
             return View("login");
         }
         
@@ -87,37 +83,38 @@ namespace App.Controllers
             return Redirect("/");
         }
 
-        [HttpGet("denied")]
+        [HttpGet("Denied")]
         public IActionResult Denied()
         {
             return View();
         }
 
+        [HttpGet("Register")]
         public IActionResult Register()
         {
             return View();
         }
 
-        [HttpPost]
+        [HttpPost("Register")]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Register(User user)
         {
             if(user.Name == null || user.Email == null)
             {
                 TempData["Error"] = "Nome e Email não podem estar vazios";
-                return View();
+                return View("Register");
             }
 
             else if (user.Name.Length < 4 || user.Email.Length < 4)
             {
                 TempData["Error"] = "Nome e Email não podem ter menos que 4 caracteres";
-                return View();
+                return View("Register");
             }
 
             else if (user.ImgFile != null && user.ImgFile.Length > 0)
             {
                 var cont = user.ImgFile.ContentType;
-                if(cont == "image/png" || cont == "image/bmp" || cont == "image/jpg")
+                if(cont == "image/png" || cont == "image/bmp" || cont == "image/jpeg")
                 {
                     user.Image = ImgMethodsService.ImageIFormForBytetArray(user.ImgFile);
                     user.UserLevel = Models.Enums.UserLevel.Public;
@@ -127,10 +124,14 @@ namespace App.Controllers
                 else
                 {
                     TempData["Error"] = "Nenhum arquivo do tipo bmp, jpg, png foi selecionado";
-                    return View();
+                    return View("Register");
                 }
             }
-            return View("login");
+            else
+            {
+                TempData["Error"] = "Nenhum arquivo do tipo bmp, jpg, png foi selecionado";
+                return View("Register");
+            }
         }
 
         public IActionResult Privacy()

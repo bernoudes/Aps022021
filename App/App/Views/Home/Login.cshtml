@@ -3,31 +3,42 @@
     var returnUrl = ViewData["ReturnUrl"] as string;
     var error = TempData["Error"] as string;
 }
+    <div class="content_side_l backgroun_light">
+        <div class="titleContetSide">
+            <h2>BEM-VINDO AO MAPA</h2>
+            <h4>ministério da agricultura</h4>
+        </div>
+        <p>
+            Para nós o mais importante é o
+            desenvolvimento sustentável
+        </p>
+    </div>
 
-@if (TempData["DataHere"] != null)
-{
-    <h3>Erro na Ação Anterior</h3>
-    <p>@TempData["DataHere"]</p>
-}
-
-<div style="height: 100vh;" class="d-flex flex-column align-items-center">
-    <form action="/login?ReturnUrl=@System.Net.WebUtility.UrlEncode(returnUrl)" method="post" enctype="multipart/form-data">
+    <div class="content_side_r">
         <h1>Entrar</h1>
-        <div class="form-group p-2 w-50">
-            <label for="iemail">Email:</label>
-            <input type="email" class="form-control" id="iemail" asp-for="Email">
+        <div class="error_message">
+            @if (TempData["Error"] != null)
+            {
+                <p>@TempData["Error"]</p>
+            }
         </div>
-        <div class="form-group p-2 d-flex flex-column" style="width: 200px; margin-bottom: 10px;">
-            <label for="ifileLoad">
-                <div class="fingerPrintArea">
-                    <label>COLOQUE<br />A IMAGEM<br />AQUI</label>
-                </div>
-            </label>
-            <div>
-                <button type="submit" class="btn btn-danger" style="width: 200px;"> Liberar Imagem</button>
+        <form action="/login?ReturnUrl=@System.Net.WebUtility.UrlEncode(returnUrl)" method="post" enctype="multipart/form-data">
+            <div class="form-group p-2 w-50">
+                <label for="iemail">Email:</label>
+                <input type="email" class="form-control" id="iemail" asp-for="Email">
             </div>
-            <input id="ifileLoad" asp-for="ImgFile" />
-        </div>
-        <button type="submit" class="btn btn-success" value="login">Entrar</button>
-    </form>
-</div>
+            <div class="d-flex flex-column align-items-center" style="width:max-content">
+                <div class="form-group p-2 d-flex flex-column" style="width: 200px; margin-bottom: 10px;">
+                    <label for="ifileLoad" class="fingerPrintArea">
+                        <p id="iShowResult">Click Aqui para Carregar a imagem</p>
+                    </label>
+                    <input hidden id="ifileLoad" asp-for="ImgFile" oninput="changeScript()" />
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-success mr-4" value="login">Entrar</button>
+                    <button type="reset" class="btn btn-danger">Limpar</button>
+                </div>
+                <a asp-action="Register" class="mt-4">Ir para o Registro</a>
+            </div>
+        </form>
+    </div>
