@@ -1,20 +1,9 @@
 ﻿@model App.Models.User
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "RegisterMinister";
 }
 
-<div class="content_side_l backgroun_night" style="color:white;">
-    <div class="titleContetSide" style="border-color: white;">
-        <h2>BEM-VINDO AO MAPA</h2>
-        <h4>ministério da agricultura</h4>
-    </div>
-    <p>
-        Para nós o mais importante é o
-        desenvolvimento sustentável
-    </p>
-</div>
-
-<div class="content_side_r">
+<div class="content_side">
     <h1>Registro</h1>
     <div class="error_message">
         @if (TempData["Error"] != null)
@@ -23,7 +12,7 @@
         }
     </div>
 
-    <form asp-action="Register" enctype="multipart/form-data">
+    <form asp-action="Create" enctype="multipart/form-data">
         <div class="form-group p-2 w-50">
             <label for="iname">Nome:</label>
             <input type="text" class="form-control" id="iname" asp-for="Name">
@@ -31,6 +20,26 @@
         <div class="form-group p-2 w-50">
             <label for="iemail">Email:</label>
             <input type="email" class="form-control" id="iemail" asp-for="Email">
+        </div>
+        <div class="form-group p-2 w-50">
+            <label for="iPosition">Posição:</label>
+            <input type="text" class="form-control" id="iPosition" asp-for="Position">
+        </div>
+        <div class="form-group p-2 d-flex flex-row">
+            <label>Nivel de Acesso:</label>&nbsp;
+
+            <div class="form-check mr-3">
+                <input type="radio" class="form-check-input" asp-for="UserLevel" value="1" checked />
+                <label>Publico</label>
+            </div>
+            <div class="form-check mr-3">
+                <input type="radio" class="form-check-input" asp-for="UserLevel" value="2" />
+                <label>Diretor</label>
+            </div>
+            <div class="form-check mr-3">
+                <input type="radio" class="form-check-input" asp-for="UserLevel" value="3" />
+                <label>Ministro</label>
+            </div>
         </div>
         <div class="d-flex flex-column align-items-center" style="width:max-content">
             <div class="form-group p-2 d-flex flex-column" style="width: 200px; margin-bottom: 10px;">
@@ -43,7 +52,6 @@
                 <button type="submit" class="btn btn-success mr-4" value="Regiter">Registar</button>
                 <button type="reset" class="btn btn-danger">Limpar</button>
             </div>
-            <a asp-action="login" class="mt-4">Ir para o login</a>
         </div>
     </form>
 </div>

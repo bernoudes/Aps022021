@@ -3,24 +3,25 @@
 @{
     ViewData["Title"] = "Products";
 }
+<div class="content_side">
+    <h1>Produtos   <a asp-action="Create"><button class="btn btn-success">Cadastrar novo</button></a></h1>
+    @if (TempData["message"] != null)
+    {
+        <h3>Erro na Ação Anterior</h3>
+        <p>@TempData["message"]</p>
+    }
 
-<h1>Produtos   <a asp-action="Create"><button class="btn btn-success">Cadastrar novo</button></a></h1>
-@if (TempData["message"] != null)
-{
-    <h3>Erro na Ação Anterior</h3>
-    <p>@TempData["message"]</p>
-}
-
-@foreach (var item in Model)
-{
-    <div class="InternalInfoBox">
-        <p style="word-break: break-all; white-space:normal;">
-            <strong>Nome do Produto:&nbsp;</strong>@Html.DisplayFor(modelItem => item.Name)<br />
-        </p>
-        <div>
-            <a asp-action="Edit" asp-route-id="@item.Id"><button class="btn btn-primary">Editar</button></a>
-            <a asp-action="Delete" asp-route-id="@item.Id"><button class="btn btn-danger">Deletar</button></a>
+    @foreach (var item in Model)
+    {
+        <div class="InternalInfoBox">
+            <p style="word-break: break-all; white-space:normal;">
+                <strong>Nome do Produto:&nbsp;</strong>@Html.DisplayFor(modelItem => item.Name)<br />
+            </p>
+            <div>
+                <a asp-action="Edit" asp-route-id="@item.Id"><button class="btn btn-primary">Editar</button></a>
+                <a asp-action="Delete" asp-route-id="@item.Id"><button class="btn btn-danger">Deletar</button></a>
+            </div>
         </div>
-    </div>
-    <br />
-}
+        <br />
+    }
+</div>

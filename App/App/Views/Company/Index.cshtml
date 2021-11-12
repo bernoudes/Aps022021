@@ -2,66 +2,68 @@
 @{
     ViewData["Title"] = "Empresas";
 }
+<div class="content_side">
+    <h1>Empresas    <a asp-action="Create"><button class="btn btn-success">Cadastrar novo</button></a></h1>
+    @if (TempData["message"] != null)
+    {
+        <h3>Erro na Ação Anterior</h3>
+        <p>@TempData["message"]</p>
+    }
 
-<h1>Empresas    <a asp-action="Create"><button class="btn btn-success">Cadastrar novo</button></a></h1>
-@if (TempData["message"] != null)
-{
-    <h3>Erro na Ação Anterior</h3>
-    <p>@TempData["message"]</p>
-}
-@foreach (var item in Model)
-{
-    <div class="InternalInfoBox">
-        <p style="word-break: break-all; white-space:normal;">
-            <strong>Nome da Unidade:&nbsp;</strong>@Html.DisplayFor(modelItem => item.Name)<br />
-            <strong>Endereço do produtor:&nbsp;</strong><br />
-            &nbsp;&nbsp;&nbsp;&nbsp;Rua/Avenida: @Html.DisplayFor(modelItem => item.Address_Street)
-            &nbsp;&nbsp;&nbsp;&nbsp;Numero: @Html.DisplayFor(modelItem => item.Address_Number)<br />
-            &nbsp;&nbsp;&nbsp;&nbsp;Cep: @Html.DisplayFor(modelItem => item.Address_CEP)<br />
-            <strong>Mercado Destinado:&nbsp;</strong>@Html.DisplayFor(modelItem => item.TargetMarket)<br />
-            <strong>Numero de Empregados:&nbsp;</strong>@Html.DisplayFor(modelItem => item.NumberOfEmployees)<br />
-            <strong>Quantidade de máquinas:&nbsp;</strong>@Html.DisplayFor(modelItem => item.QuantityOfMachines)<br />
-            <strong>Nível de automação:&nbsp;</strong>@Html.DisplayFor(modelItem => item.AutomationLevel)
-        </p>
-        <div style="color: red;">
-            <strong>Produtos:&nbsp;</strong><br />
-            @foreach (var product in item.CompanyProduct)
-            {
-                <strong>&nbsp; &nbsp; &nbsp;</strong>
-                @Html.DisplayFor(modelItem => product.Product.Name)<br />
-            }
+    @foreach (var item in Model)
+    {
+        <div class="InternalInfoBox">
+            <p style="word-break: break-all; white-space:normal;">
+                <strong>Nome da Unidade:&nbsp;</strong>@Html.DisplayFor(modelItem => item.Name)<br />
+                <strong>Endereço do produtor:&nbsp;</strong><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;Rua/Avenida: @Html.DisplayFor(modelItem => item.Address_Street)<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;Numero: @Html.DisplayFor(modelItem => item.Address_Number)<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;Cep: @Html.DisplayFor(modelItem => item.Address_CEP)<br />
+                <strong>Mercado Destinado:&nbsp;</strong>@Html.DisplayFor(modelItem => item.TargetMarket)<br />
+                <strong>Numero de Empregados:&nbsp;</strong>@Html.DisplayFor(modelItem => item.NumberOfEmployees)<br />
+                <strong>Quantidade de máquinas:&nbsp;</strong>@Html.DisplayFor(modelItem => item.QuantityOfMachines)<br />
+                <strong>Nível de automação:&nbsp;</strong>@Html.DisplayFor(modelItem => item.AutomationLevel)
+            </p>
+            <div style="color: red;">
+                <strong>Produtos:&nbsp;</strong><br />
+                @foreach (var product in item.CompanyProduct)
+                {
+                    <strong>&nbsp; &nbsp; &nbsp;</strong>
+                    @Html.DisplayFor(modelItem => product.Product.Name)<br />
+                }
+            </div>
+            <div style="color: green;">
+                <strong>Agrotóxicos Utilizados:&nbsp;</strong><br />
+                @foreach (var agrotoxico in item.CompanyAgrotoxic)
+                {
+                    <strong>&nbsp; &nbsp; &nbsp;</strong>
+                    @Html.DisplayFor(modelItem => agrotoxico.AgroToxic.Name)<br />
+                }
+            </div>
+            <div style="color: blue;">
+                <strong>Taxas:&nbsp;</strong><br />
+                @foreach (var tax in item.CompanyTax)
+                {
+                    <strong>&nbsp; &nbsp; &nbsp;</strong>
+                    @Html.DisplayFor(modelItem => tax.Tax.Name)
+                    <strong>—</strong>
+                    @Html.DisplayFor(modelItem => tax.Tax.Initials)
+                    <br />
+                }
+            </div>
+            <div style="color: darkorange;">
+                <strong>Incentivos:&nbsp;</strong><br />
+                @foreach (var incentive in item.CompanyIncentive)
+                {
+                    <strong>&nbsp; &nbsp; &nbsp;</strong>
+                    @Html.DisplayFor(modelItem => incentive.Incentive.Name)<br />
+                }
+            </div>
+            <div>
+                <a asp-action="Edit" asp-route-id="@item.Id"><button class="btn btn-primary">Editar</button></a>
+                <a asp-action="Delete" asp-route-id="@item.Id"><button class="btn btn-danger">Deletar</button></a>
+            </div>
         </div>
-        <div style="color: green;">
-            <strong>Agrotóxicos Utilizados:&nbsp;</strong><br />
-            @foreach (var agrotoxico in item.CompanyAgrotoxic)
-            {
-                <strong>&nbsp; &nbsp; &nbsp;</strong>
-                @Html.DisplayFor(modelItem => agrotoxico.AgroToxic.Name)<br />
-            }
-        </div>
-        <div style="color: blue;">
-            <strong>Taxas:&nbsp;</strong><br />
-            @foreach (var tax in item.CompanyTax)
-            {
-                <strong>&nbsp; &nbsp; &nbsp;</strong>
-                @Html.DisplayFor(modelItem => tax.Tax.Name)
-                <strong>—</strong>
-                @Html.DisplayFor(modelItem => tax.Tax.Initials)
-                <br />
-            }
-        </div>
-        <div style="color: darkorange;">
-            <strong>Incentivos:&nbsp;</strong><br />
-            @foreach (var incentive in item.CompanyIncentive)
-            {
-                <strong>&nbsp; &nbsp; &nbsp;</strong>
-                @Html.DisplayFor(modelItem => incentive.Incentive.Name)<br />
-            }
-        </div>
-        <div>
-            <a asp-action="Edit" asp-route-id="@item.Id"><button class="btn btn-primary">Editar</button></a>
-            <a asp-action="Delete" asp-route-id="@item.Id"><button class="btn btn-danger">Deletar</button></a>
-        </div>
-    </div>
-    <br />
-}
+        <br />
+    }
+</div>

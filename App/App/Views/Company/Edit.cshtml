@@ -2,151 +2,151 @@
 @{
     ViewData["Title"] = "Edit";
 }
-
-<h1>Edição da empresa</h1>
-<form asp-action="Edit">
-    <input type="hidden" asp-for="@Model.Company.Id" />
-    <div class="form-group p-2 w-50">
-        <label asp-for="Company.Name">Nome:</label>
-        <input asp-for="Company.Name" class="form-control" />
-    </div>
-    <h2>Endereço:</h2>
-    <div class="form-group p-2 w-50">
-        <label asp-for="Company.Address_Street">Rua</label>
-        <input asp-for="Company.Address_Street" class="form-control" />
-    </div>
-    <div class="form-group p-2 w-50">
-        <label asp-for="Company.Address_Number">Numero:</label>
-        <input type="number" asp-for="Company.Address_Number" class="form-control" />
-    </div>
-    <div class="form-group p-2 w-50">
-        <label asp-for="Company.Address_CEP">Cep - (APENAS NUMEROS)</label>
-        <input type="number" asp-for="Company.Address_CEP" class="form-control" />
-    </div>
-
-    <!--NEXT IS TARGET MARKET-->
-    <div class="form-group p-2 d-flex flex-row">
-        <label>Mercado destinado:</label>&nbsp;
-
-        <div class="form-check mr-3">
-            <input type="radio" class="form-check-input" asp-for="Company.TargetMarket" value="1" checked="@(1==(int)Model?.Company.TargetMarket)" />
-            <label>Interno</label>
+<div class="content_side">
+    <h1>Edição da empresa</h1>
+    <form asp-action="Edit">
+        <input type="hidden" asp-for="@Model.Company.Id" />
+        <div class="form-group p-2 w-50">
+            <label asp-for="Company.Name">Nome:</label>
+            <input asp-for="Company.Name" class="form-control" />
         </div>
-        <div class="form-check mr-3">
-            <input type="radio" class="form-check-input" asp-for="Company.TargetMarket" value="2" checked="@(2==(int)Model?.Company.TargetMarket)" />
-            <label>Externo</label>
+        <h2>Endereço:</h2>
+        <div class="form-group p-2 w-50">
+            <label asp-for="Company.Address_Street">Rua</label>
+            <input asp-for="Company.Address_Street" class="form-control" />
         </div>
-    </div>
+        <div class="form-group p-2 w-50">
+            <label asp-for="Company.Address_Number">Numero:</label>
+            <input type="number" asp-for="Company.Address_Number" class="form-control" />
+        </div>
+        <div class="form-group p-2 w-50">
+            <label asp-for="Company.Address_CEP">Cep - (APENAS NUMEROS)</label>
+            <input type="number" asp-for="Company.Address_CEP" class="form-control" />
+        </div>
 
-    <div class="form-group p-2 w-50">
-        <label asp-for="Company.NumberOfEmployees">Numero de empregados:</label>
-        <input type="number" asp-for="Company.NumberOfEmployees" class="form-control" />
-    </div>
-    <div class="form-group p-2 w-50">
-        <label asp-for="Company.QuantityOfMachines">Quantidade de Máquinas:</label>
-        <input type="number" asp-for="Company.QuantityOfMachines" class="form-control" />
-    </div>
+        <!--NEXT IS TARGET MARKET-->
+        <div class="form-group p-2 d-flex flex-row">
+            <label>Mercado destinado:</label>&nbsp;
 
-    <!--NEXT IS LEVEL OF AUTOMATION-->
-    <div class="form-group p-2 d-flex flex-row">
-        <label>Nível de Automação:</label>&nbsp;
+            <div class="form-check mr-3">
+                <input type="radio" class="form-check-input" asp-for="Company.TargetMarket" value="1" checked="@(1==(int)Model?.Company.TargetMarket)" />
+                <label>Interno</label>
+            </div>
+            <div class="form-check mr-3">
+                <input type="radio" class="form-check-input" asp-for="Company.TargetMarket" value="2" checked="@(2==(int)Model?.Company.TargetMarket)" />
+                <label>Externo</label>
+            </div>
+        </div>
 
-        <div class="form-check mr-3">
-            <input type="radio" class="form-check-input" asp-for="Company.AutomationLevel" value="1" checked="@(1==(int)Model?.Company.AutomationLevel)" />
-            <label>Menos Que 20%</label>
+        <div class="form-group p-2 w-50">
+            <label asp-for="Company.NumberOfEmployees">Numero de empregados:</label>
+            <input type="number" asp-for="Company.NumberOfEmployees" class="form-control" />
         </div>
-        <div class="form-check mr-3">
-            <input type="radio" class="form-check-input" asp-for="Company.AutomationLevel" value="2" checked="@(2==(int)Model?.Company.AutomationLevel)" />
-            <label>Entre 20% e 50%</label>
+        <div class="form-group p-2 w-50">
+            <label asp-for="Company.QuantityOfMachines">Quantidade de Máquinas:</label>
+            <input type="number" asp-for="Company.QuantityOfMachines" class="form-control" />
         </div>
-        <div class="form-check mr-3">
-            <input type="radio" class="form-check-input" asp-for="Company.AutomationLevel" value="3" checked="@(3==(int)Model?.Company.AutomationLevel)" />
-            <label>Entre 50% e 80%</label>
-        </div>
-        <div class="form-check mr-3">
-            <input type="radio" class="form-check-input" asp-for="Company.AutomationLevel" value="4" checked="@(4==(int)Model?.Company.AutomationLevel)" />
-            <label>Entre 80% e 90%</label>
-        </div>
-    </div>
 
-    <!--PRODUCTS-->
-    <h3 style="color: red;">Produtos</h3>
-    <div class="list-check" style="border-color: red;">
-        @{
-            var countpro = 0;
-            foreach (var product in Model.Product)
-            {
-                <div class="form-check mr-3">
-                    <input type="hidden" asp-for="ProductCheck[countpro].Id" />
-                    <input type="checkbox" class="form-check-input" asp-for="ProductCheck[countpro].isChecked" />
-                    <label>@Html.DisplayFor(modelitem => product.Name)</label>
-                </div>
-                countpro++;
+        <!--NEXT IS LEVEL OF AUTOMATION-->
+        <div class="form-group p-2 d-flex flex-row">
+            <label>Nível de Automação:</label>&nbsp;
+
+            <div class="form-check mr-3">
+                <input type="radio" class="form-check-input" asp-for="Company.AutomationLevel" value="1" checked="@(1==(int)Model?.Company.AutomationLevel)" />
+                <label>Menos Que 20%</label>
+            </div>
+            <div class="form-check mr-3">
+                <input type="radio" class="form-check-input" asp-for="Company.AutomationLevel" value="2" checked="@(2==(int)Model?.Company.AutomationLevel)" />
+                <label>Entre 20% e 50%</label>
+            </div>
+            <div class="form-check mr-3">
+                <input type="radio" class="form-check-input" asp-for="Company.AutomationLevel" value="3" checked="@(3==(int)Model?.Company.AutomationLevel)" />
+                <label>Entre 50% e 80%</label>
+            </div>
+            <div class="form-check mr-3">
+                <input type="radio" class="form-check-input" asp-for="Company.AutomationLevel" value="4" checked="@(4==(int)Model?.Company.AutomationLevel)" />
+                <label>Entre 80% e 90%</label>
+            </div>
+        </div>
+
+        <!--PRODUCTS-->
+        <h3 style="color: red;">Produtos</h3>
+        <div class="list-check" style="border-color: red;">
+            @{
+                var countpro = 0;
+                foreach (var product in Model.Product)
+                {
+                    <div class="form-check mr-3">
+                        <input type="hidden" asp-for="ProductCheck[countpro].Id" />
+                        <input type="checkbox" class="form-check-input" asp-for="ProductCheck[countpro].isChecked" />
+                        <label>@Html.DisplayFor(modelitem => product.Name)</label>
+                    </div>
+                    countpro++;
+                }
             }
-        }
-    </div>
-    <br />
+        </div>
+        <br />
 
-    <!--Agrotoxic-->
-    <h3 style="color: green;">AgroTóxicos</h3>
-    <div class="list-check" style="border-color: green;">
-        @{
-            countpro = 0;
-            foreach (var agroToxic in Model.AgroToxic)
-            {
-                <div class="form-check mr-3">
-                    <input type="hidden" asp-for="AgroToxicCheck[countpro].Id" />
-                    <input type="checkbox" class="form-check-input" asp-for="AgroToxicCheck[countpro].isChecked" />
-                    <label>@Html.DisplayFor(modelitem => agroToxic.Name)</label>
-                </div>
-                countpro++;
+        <!--Agrotoxic-->
+        <h3 style="color: green;">AgroTóxicos</h3>
+        <div class="list-check" style="border-color: green;">
+            @{
+                countpro = 0;
+                foreach (var agroToxic in Model.AgroToxic)
+                {
+                    <div class="form-check mr-3">
+                        <input type="hidden" asp-for="AgroToxicCheck[countpro].Id" />
+                        <input type="checkbox" class="form-check-input" asp-for="AgroToxicCheck[countpro].isChecked" />
+                        <label>@Html.DisplayFor(modelitem => agroToxic.Name)</label>
+                    </div>
+                    countpro++;
+                }
             }
-        }
-    </div>
-    <br />
+        </div>
+        <br />
 
-    <!--Tax-->
-    <h3 style="color:blue;">Taxas</h3>
-    <div class="list-check" style="border-color:blue;">
-        @{
-            countpro = 0;
-            foreach (var tax in Model.Tax)
-            {
-                <div class="form-check mr-3">
-                    <input type="hidden" asp-for="TaxCheck[countpro].Id" />
-                    <input type="checkbox" class="form-check-input" asp-for="TaxCheck[countpro].isChecked" />
-                    <label>@Html.DisplayFor(modelitem => tax.Name)</label>
-                </div>
-                countpro++;
+        <!--Tax-->
+        <h3 style="color:blue;">Taxas</h3>
+        <div class="list-check" style="border-color:blue;">
+            @{
+                countpro = 0;
+                foreach (var tax in Model.Tax)
+                {
+                    <div class="form-check mr-3">
+                        <input type="hidden" asp-for="TaxCheck[countpro].Id" />
+                        <input type="checkbox" class="form-check-input" asp-for="TaxCheck[countpro].isChecked" />
+                        <label>@Html.DisplayFor(modelitem => tax.Name)</label>
+                    </div>
+                    countpro++;
+                }
             }
-        }
-    </div>
-    <br />
+        </div>
+        <br />
 
-    <!--Incentive-->
-    <h3 style="color: darkorange;">Incentivos</h3>
-    <div class="list-check" style="border-color: darkorange;">
-        @{
-            countpro = 0;
-            foreach (var incentive in Model.Incentive)
-            {
-                <div class="form-check mr-3">
-                    <input type="hidden" asp-for="IncentiveCheck[countpro].Id" />
-                    <input type="checkbox" class="form-check-input" asp-for="IncentiveCheck[countpro].isChecked" />
-                    <label>@Html.DisplayFor(modelitem => incentive.Name)</label>
-                </div>
-                countpro++;
+        <!--Incentive-->
+        <h3 style="color: darkorange;">Incentivos</h3>
+        <div class="list-check" style="border-color: darkorange;">
+            @{
+                countpro = 0;
+                foreach (var incentive in Model.Incentive)
+                {
+                    <div class="form-check mr-3">
+                        <input type="hidden" asp-for="IncentiveCheck[countpro].Id" />
+                        <input type="checkbox" class="form-check-input" asp-for="IncentiveCheck[countpro].isChecked" />
+                        <label>@Html.DisplayFor(modelitem => incentive.Name)</label>
+                    </div>
+                    countpro++;
+                }
             }
-        }
-    </div>
-    <br />
+        </div>
+        <br />
 
-    <div class="form-group d-flex flex-row">
-        <button class="btn btn-primary mr-5" type="submit" value="Save"> Salvar </button>
-        <button class="btn btn-danger" asp-action="ListCompany"> Voltar </button>
-    </div>
-</form>
-
+        <div class="form-group d-flex flex-row">
+            <button class="btn btn-primary mr-5" type="submit" value="Save"> Salvar </button>
+            <button class="btn btn-danger" asp-action="ListCompany"> Voltar </button>
+        </div>
+    </form>
+</div>
 
 
 

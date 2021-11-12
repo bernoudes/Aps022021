@@ -3,37 +3,35 @@
     ViewData["Title"] = "Empresas";
 }
 
-<div>
+<div class="content_side">
     <h1>Empresas</h1>
-    <div class="d-flex flex-wrap">
-        @foreach (var item in Model)
-        {
-            <div class="InternalInfoBoxLat ">
-                <p style="word-break: break-all; white-space:normal;">
-                    <strong>Nome da Unidade:&nbsp;</strong>@Html.DisplayFor(modelItem => item.Name)<br />
-                    <strong>Endereço do produtor:&nbsp;</strong><br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;Rua/Avenida: @Html.DisplayFor(modelItem => item.Address_Street)
-                    &nbsp;&nbsp;&nbsp;&nbsp;Numero: @Html.DisplayFor(modelItem => item.Address_Number)<br />
-                    &nbsp;&nbsp;&nbsp;&nbsp;Cep: @Html.DisplayFor(modelItem => item.Address_CEP)<br />
-                    <strong>Mercado Destinado:&nbsp;</strong>@Html.DisplayFor(modelItem => item.TargetMarket)<br />
-                    <strong>Numero de Empregados:&nbsp;</strong>@Html.DisplayFor(modelItem => item.NumberOfEmployees)<br />
-                    <strong>Quantidade de máquinas:&nbsp;</strong>@Html.DisplayFor(modelItem => item.QuantityOfMachines)<br />
-                    <strong>Nível de automação:&nbsp;</strong>@Html.DisplayFor(modelItem => item.AutomationLevel) %<br />
-                    <strong>Produtos:&nbsp;</strong><br />
-                    @foreach (var product in item.CompanyProduct)
-                    {
-                        <strong>&nbsp; &nbsp; &nbsp;</strong>
-                        @Html.DisplayFor(modelItem => product.Product.Name)<br />
-                    }
-                    <strong>Agrotóxicos Utilizados:&nbsp;</strong><br />
-                    @foreach (var agrotoxico in item.CompanyAgrotoxic)
-                    {
-                        <strong>&nbsp; &nbsp; &nbsp;</strong>
-                        @Html.DisplayFor(modelItem => agrotoxico.AgroToxic.Name)<br />
-                    }
-                </p>
-            </div>
-            <br />
-        }
-    </div>
+    @foreach (var item in Model)
+    {
+        <div class="InternalInfoBox">
+            <p style="word-break: break-all; white-space:normal;">
+                <strong>Nome da Unidade:&nbsp;</strong>@Html.DisplayFor(modelItem => item.Name)<br />
+                <strong>Endereço do produtor:&nbsp;</strong><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;Rua/Avenida: @Html.DisplayFor(modelItem => item.Address_Street)<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;Numero: @Html.DisplayFor(modelItem => item.Address_Number)<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;Cep: @Html.DisplayFor(modelItem => item.Address_CEP)<br />
+                <strong>Mercado Destinado:&nbsp;</strong>@Html.DisplayFor(modelItem => item.TargetMarket)<br />
+                <strong>Numero de Empregados:&nbsp;</strong>@Html.DisplayFor(modelItem => item.NumberOfEmployees)<br />
+                <strong>Quantidade de máquinas:&nbsp;</strong>@Html.DisplayFor(modelItem => item.QuantityOfMachines)<br />
+                <strong>Nível de automação:&nbsp;</strong>@Html.DisplayFor(modelItem => item.AutomationLevel) %<br />
+                <strong>Produtos:&nbsp;</strong><br />
+                @foreach (var product in item.CompanyProduct)
+                {
+                    <strong>&nbsp; &nbsp; &nbsp;</strong>
+                    @Html.DisplayFor(modelItem => product.Product.Name)<br />
+                }
+                <strong>Agrotóxicos Utilizados:&nbsp;</strong><br />
+                @foreach (var agrotoxico in item.CompanyAgrotoxic)
+                {
+                    <strong>&nbsp; &nbsp; &nbsp;</strong>
+                    @Html.DisplayFor(modelItem => agrotoxico.AgroToxic.Name)<br />
+                }
+            </p>
+        </div>
+        <br />
+    }
 </div>

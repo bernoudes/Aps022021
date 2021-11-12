@@ -36,22 +36,21 @@ namespace App.Controllers
             _taxService = taxService;
         }
 
-        [Authorize(Roles = "Minister")]
+        [Authorize(Roles = "Minister,PeopleTwo")]
         public async Task<IActionResult> Index()
         {
             var list = await _companyService.FindAllAsync();
             return View(list);
         }
 
-        [Authorize(Roles = "Public")]
+        [Authorize(Roles = "Public,Minister,PeopleTwo")]
         public async Task<IActionResult> ListCompany()
         {
             var list = await _companyService.FindAllAsync();
             return View(list);
         }
 
-        [Authorize(Roles = "Minister")]
-        [Authorize(Roles = "PeopleTwo")]
+        [Authorize(Roles = "Minister,PeopleTwo")]
         //CREATE
         public async Task<IActionResult> Create()
         {
@@ -77,7 +76,7 @@ namespace App.Controllers
             return View(companyedit);
         }
 
-        [Authorize(Roles = "Minister")]
+        [Authorize(Roles = "Minister,PeopleTwo")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CompanyViewModel companyViewModel)
@@ -87,7 +86,7 @@ namespace App.Controllers
         }
 
         //EDIT
-        [Authorize(Roles = "Minister")]
+        [Authorize(Roles = "Minister,PeopleTwo")]
         public async Task<IActionResult> Edit(int? id)
         {
             if(id == null)
@@ -121,7 +120,7 @@ namespace App.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Minister")]
+        [Authorize(Roles = "Minister,PeopleTwo")]
         public async Task<IActionResult> Edit(int id, CompanyViewModel companyViewModel)
         {
             if (!ModelState.IsValid)
@@ -145,7 +144,7 @@ namespace App.Controllers
         }
 
         //REMOVE
-        [Authorize(Roles = "Minister")]
+        [Authorize(Roles = "Minister,PeopleTwo")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -162,7 +161,7 @@ namespace App.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Minister")]
+        [Authorize(Roles = "Minister,PeopleTwo")]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -179,7 +178,7 @@ namespace App.Controllers
             }
         }
         //ERRO
-        [Authorize(Roles = "Minister")]
+        [Authorize(Roles = "Minister,PeopleTwo")]
         public IActionResult Error(string message)
         {
             var viewModel = new ErrorViewModel

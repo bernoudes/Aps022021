@@ -15,6 +15,7 @@ using System.IO;
 using System.Drawing;
 using Microsoft.AspNetCore.Http;
 using App.Models.ViewModel;
+using App.Services.Exceptions;
 
 namespace App.Controllers
 {
@@ -31,6 +32,16 @@ namespace App.Controllers
 
         public IActionResult Index()
         {
+            if(HttpContext.User.Identity.Name != null)
+            {
+                var minister = Models.Enums.UserLevel.Minister.ToString();
+                var personTwo = Models.Enums.UserLevel.Minister.ToString();
+                if (HttpContext.User.IsInRole(minister) || HttpContext.User.IsInRole(personTwo))
+                {
+                    return RedirectToAction("Index", "Company");
+                }
+                return RedirectToAction("ListCompany", "Company");
+            }
             return View("login");
         }
 
@@ -99,37 +110,14 @@ namespace App.Controllers
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Register(User user)
         {
-            if(user.Name == null || user.Email == null)
+            try
             {
-                TempData["Error"] = "Nome e Email não podem estar vazios";
-                return View("Register");
+                await _userService.InsertAsync(user);
+                return View("login");
             }
-
-            else if (user.Name.Length < 4 || user.Email.Length < 4)
+            catch (IntegrityException e)
             {
-                TempData["Error"] = "Nome e Email não podem ter menos que 4 caracteres";
-                return View("Register");
-            }
-
-            else if (user.ImgFile != null && user.ImgFile.Length > 0)
-            {
-                var cont = user.ImgFile.ContentType;
-                if(cont == "image/png" || cont == "image/bmp" || cont == "image/jpeg")
-                {
-                    user.Image = ImgMethodsService.ImageIFormForBytetArray(user.ImgFile);
-                    user.UserLevel = Models.Enums.UserLevel.Public;
-                    await _userService.InsertAsync(user);
-                    return View("login");
-                }
-                else
-                {
-                    TempData["Error"] = "Nenhum arquivo do tipo bmp, jpg, png foi selecionado";
-                    return View("Register");
-                }
-            }
-            else
-            {
-                TempData["Error"] = "Nenhum arquivo do tipo bmp, jpg, png foi selecionado";
+                TempData["Error"] = e.Message;
                 return View("Register");
             }
         }

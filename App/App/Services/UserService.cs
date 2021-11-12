@@ -35,15 +35,6 @@ namespace App.Services
             return await _context.User.FirstOrDefaultAsync(x => x.Email == email);
         }
 
-        
-
-        //CREATE
-        public async Task InsertAsync(User obj)
-        {
-            _context.User.Add(obj);
-            await _context.SaveChangesAsync();
-        }
-
         //UPDATE
         public async Task UpdateAsync(User obj)
         {
@@ -69,7 +60,7 @@ namespace App.Services
             try
             {
                 var obj = await _context.User.FindAsync(id);
-                _context.User.Add(obj);
+                _context.User.Remove(obj);
                 await _context.SaveChangesAsync();
             }
             catch(DbUpdateException e)
@@ -78,10 +69,40 @@ namespace App.Services
             }
         }
         ////////////////////////////////////////////////////
-        ///
-       public async Task FindAndCompareFingerPrinterAsync(User obj)
+        //CREATE
+        public async Task InsertAsync(User user)
         {
-            var user = await _context.User.FirstOrDefaultAsync(x => x.Email == obj.Email);      
+            if(user.Name == null || user.Email == null)
+            {
+                throw new IntegrityException("Nome e Email não podem estar vazios");
+            }
+            else if (user.Name.Length< 4 || user.Email.Length< 4)
+            {
+                throw new IntegrityException("Nome e Email não podem ter menos que 4 caracteres");
+            }
+
+            else if (user.ImgFile != null && user.ImgFile.Length > 0)
+            {
+                var cont = user.ImgFile.ContentType;
+                if (cont == "image/png" || cont == "image/bmp" || cont == "image/jpeg")
+                {
+                    user.Image = ImgMethodsService.ImageIFormForBytetArray(user.ImgFile);
+                    if(user.UserLevel == 0)
+                    {
+                        user.UserLevel = Models.Enums.UserLevel.Public;
+                    }
+                    _context.User.Add(user);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new IntegrityException("Nenhum arquivo do tipo bmp, jpg, png foi selecionado");
+                }
+            }
+            else
+            {
+                throw new IntegrityException("Nenhum arquivo do tipo bmp, jpg, png foi selecionado");
+            }
         }
     }
 }

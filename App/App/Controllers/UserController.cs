@@ -41,8 +41,16 @@ namespace App.Controllers
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Create(User user)
         {
-            await _userService.InsertAsync(user);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await _userService.InsertAsync(user);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (IntegrityException e)
+            {
+                TempData["Error"] = e.Message;
+                return View("Register");
+            }
         }
      
         //UPDATE

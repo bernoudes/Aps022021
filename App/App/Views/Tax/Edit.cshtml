@@ -2,28 +2,28 @@
 @{
     ViewData["Title"] = "TaxEdit";
 }
-
-<h1>Taxas Edição</h1>
-<form asp-action="Edit">
-    <div class="form-group p-2 w-50">
-        <label asp-for="Name">Nome:</label>
-        <input asp-for="Name" class="form-control" />
-    </div>
-    <div class="form-group p-2 w-50">
-        <label asp-for="Initials">Sigla:</label>
-        <input asp-for="Initials" class="form-control" />
-    </div>
-    <div class="form-group p-2 w-50 d-flex flex-column">
-        <label for="idescription">Descrição</label>
-        <textarea class="form-control" rows="6" maxlength="200" style="resize:none;" asp-for="Description">
+<div class="content_side">
+    <h1>Taxas Edição</h1>
+    <form asp-action="Edit">
+        <div class="form-group p-2 w-50">
+            <label asp-for="Name">Nome:</label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+        <div class="form-group p-2 w-50">
+            <label asp-for="Initials">Sigla:</label>
+            <input asp-for="Initials" class="form-control" />
+        </div>
+        <div class="form-group p-2 w-50 d-flex flex-column">
+            <label for="idescription">Descrição</label>
+            <textarea class="form-control" rows="6" maxlength="200" style="resize:none;" asp-for="Description">
         </textarea>
-    </div>
+        </div>
 
-    <div class="form-group d-flex flex-row">
-        <button class="btn btn-primary mr-5" type="submit" value="Save"> Salvar </button>
-        <button class="btn btn-danger" asp-action="Index"> Voltar </button>
-    </div>
-</form>
-
+        <div class="form-group d-flex flex-row">
+            <button class="btn btn-primary mr-5" type="submit" value="Save"> Salvar </button>
+            <button class="btn btn-danger" asp-action="Index"> Voltar </button>
+        </div>
+    </form>
+</div>
 
 
