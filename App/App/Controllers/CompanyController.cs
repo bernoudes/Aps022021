@@ -171,7 +171,7 @@ namespace App.Controllers
             }
             catch (IntegrityException e)
             {
-                TempData["message"] = "Não Foi Possível Excluir as informações do Agrotóxico no banco de dados" +
+                TempData["message"] = "Não Foi Possível Excluir as informações da Empresa no banco de dados" +
                     " outros dados dependem dele para existir.";
 
                 return RedirectToAction(nameof(Index));
